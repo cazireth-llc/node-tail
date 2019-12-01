@@ -60,7 +60,7 @@ class Tail extends events.EventEmitter
         @logger.error("change event for #{filename} failed: #{err}") if @logger
         @emit("error", "change event for #{filename} failed: #{err}")
         return
-      @pos = stats.size if stats.size < @pos #scenario where texts is not appended but it's actually a w+
+      @pos = stats.size if stats.size > 0 && stats.size < @pos #scenario where texts is not appended but it's actually a w+
       if stats.size > @pos
         @queue.push({start: @pos, end: stats.size})
         @pos = stats.size
